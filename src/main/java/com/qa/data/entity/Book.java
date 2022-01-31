@@ -1,14 +1,13 @@
 package com.qa.data.entity;
 
-import java.time.Year;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 
 
@@ -29,21 +28,25 @@ public class Book {
 	@NotNull
 	private String authorSurname;
 	
-	@PastOrPresent
-	private Year pubYear;
+	private String authorForename;
+	
+
+	@Max(2500)
+	@Min(1500)
+	private int pubYear; // TODO speak to Morgan about using Year object
 	
 	@NotNull
 	private boolean isDigital;
 	
 	private String publisher;
 	
-	@Size(min = 2, max = 3, message ="Please enter a valid Thema or BIC code")
+	@Size(min = 2, max = 2, message ="Please enter a valid Thema or BIC code")
 	private String genreCode;
 
 
 
-public Book(@Min(999999999) Long isbn, @NotNull String title, @NotNull String authorSurname,
-		@PastOrPresent Year pubYear, @NotNull boolean isDigital, String publisher,
+public Book(@Min(999999999) Long isbn, @NotNull String title, @NotNull String authorSurname, String authorForename,
+	int pubYear, @NotNull boolean isDigital, String publisher,
 		@Size(min = 2, max = 3, message = "Please enter a valid Thema or BIC code") String genreCode) {
 	super();
 	this.isbn = isbn;
@@ -91,13 +94,23 @@ public void setAuthorSurname(String authorSurname) {
 	this.authorSurname = authorSurname;
 }
 
+public String getAuthorForename() {
+	return authorForename;
+}
 
-public Year getPubYear() {
+
+public void setAuthorForename(String authorForename) {
+	this.authorForename = authorForename;
+}
+
+
+
+public int getPubYear() {
 	return pubYear;
 }
 
 
-public void setPubYear(Year pubYear) {
+public void setPubYear(int pubYear) {
 	this.pubYear = pubYear;
 }
 
@@ -134,7 +147,7 @@ public void setGenreCode(String genreCode) {
 
 @Override
 public String toString() {
-	return "Book: ISBN: " + isbn + ", title :" + title + ", author surname: " + authorSurname + ", publication year: " + pubYear
+	return "Book: ISBN: " + isbn + ", title :" + title + ", author: " + authorSurname + ", " + authorForename + ", publication year: " + pubYear
 			+ ", ebook: " + isDigital + ", publisher: " + publisher + ", genre code: " + genreCode + ".";
 }
 
