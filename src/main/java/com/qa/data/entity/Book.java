@@ -39,14 +39,14 @@ public class Book {
 	
 	private String publisher;
 	
-	@Size(min = 2, max = 2, message ="Please enter a valid Thema or BIC code")
+	@Size(min = 2, max = 2, message ="Please enter a valid Thema code of length 2 characters")
 	private String genreCode;
 
 
 
 public Book(@Min(999999999) Long isbn, @NotNull String title, @NotNull String authorSurname, String authorForename,
 	int pubYear, @NotNull boolean isDigital, String publisher,
-		@Size(min = 2, max = 3, message = "Please enter a valid Thema or BIC code") String genreCode) {
+		String genreCode) {
 	super();
 	this.isbn = isbn;
 	this.title = title;

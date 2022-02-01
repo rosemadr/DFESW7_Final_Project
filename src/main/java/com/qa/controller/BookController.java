@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,8 @@ import com.qa.data.entity.Book;
 @RequestMapping(path ="/books")
 public class BookController {
 	
-	private List<Book> books = new ArrayList<>(List.of(new Book(9781492077992l, "Head First Design Patterns", "Freeman","Eric", 2020 , true, "O'Reilly", "UM"), 
+	private List<Book> books = new ArrayList<>(List.of(new Book(9781492077992l, 
+			"Head First Design Patterns", "Freeman","Eric", 2020 , true, "O'Reilly", "UM"), 
 			new Book(9780140237504l, "The Catcher in the Rye", "Salinger", "J.D.", 1946, false, "Penguin", "FB")));
 	
 	
@@ -45,14 +47,40 @@ public class BookController {
 		return book;
 	}
 	
-//	@PutMapping("/{isbn}")
-//	public Book updateBook(@PathVariable("isbn") Long isbn, @RequestBody Book book) {
-//		for (Book bookInList : books) {
-//			if (bookInList.getIsbn().equals(isbn)) {
-//				book.setAuthorForename(get)
-//}
-
+	@PutMapping("/{isbn}")
+	public Book updateBook(@PathVariable("isbn") Long isbn, @RequestBody Book book) {
+		for (Book bookInList : books) {
+			if (bookInList.getIsbn().equals(isbn)) {
+				bookInList.setTitle(book.getTitle());
+				bookInList.setAuthorSurname(book.getAuthorSurname());
+				bookInList.setAuthorForename(book.getAuthorForename());
+				bookInList.setPubYear(book.getPubYear());
+				bookInList.setDigital(book.isDigital());
+				bookInList.setPublisher(book.getPublisher());
+				bookInList.setGenreCode(book.getGenreCode());
+				
+				return bookInList;
+			} 
+				
+		} throw new EntityNotFoundException();
+	}
+	
+	@DeleteMapping("/{isbn}")
+	public void deleteByIsbn(@PathVariable("isbn") Long isbn) {
+		for (Book book : books) {
+			if (book.getIsbn().equals(isbn)) {
+				int index = books.indexOf(book);
+				Book bookToDelete = books.get(index);
+				books.remove(bookToDelete);
+				System.out.println(bookToDelete + " has been deleted.");
+			} else {
+				throw new EntityNotFoundException("Book with ISBN " + isbn + " not found");
+			}
+	} 
+	
 }
+}
+				
 		
 
 		
