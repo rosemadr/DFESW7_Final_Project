@@ -3,6 +3,7 @@ package com.qa.controller;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -42,16 +43,14 @@ public class BookController {
 	
 	@RequestMapping(path ="/{isbn}", method = {RequestMethod.GET} )
 	public Book getByIsbn(@PathVariable("isbn") Long isbn) {
-		for (Book book : books) {
-			if (book.getIsbn().equals(isbn)) {
-				return book;
-			}
-		} throw new EntityNotFoundException("Book with ISBN " + isbn + " not found");
-	} 
+		if (bookRepo.findById(isbn).equals(isbn)) {
+				return bookRepo.findById(isbn).get() ;
+			} throw new EntityNotFoundException("Book with ISBN " + isbn + " not found");
+	} // TODO develop with Optional?
 	
 	@PostMapping
 	public Book createBook(@RequestBody Book book) {
-		books.add(book);
+		bookRepo.save(book);
 		return book;
 	}
 	
