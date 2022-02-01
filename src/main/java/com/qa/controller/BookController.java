@@ -6,8 +6,12 @@ import java.util.List;
 //import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.data.entity.Book;
 import com.qa.data.repository.BookRepository;
+import com.qa.service.BookService;
 
 @RestController
 @RequestMapping(path = "/books")
@@ -29,60 +34,42 @@ public class BookController {
 //			"Head First Design Patterns", "Freeman","Eric", 2020 , true, "O'Reilly", "UM"), 
 //			new Book(9780140237504l, "The Catcher in the Rye", "Salinger", "J.D.", 1946, false, "Penguin", "FB")));
 //	
-	private BookRepository bookRepo;
+	private BookService bookService;
 
 	@Autowired
-	public BookController(BookRepository bookRepo) {
-		this.bookRepo = bookRepo;
+	public BookController(BookService bookService) {
+		this.bookService = bookService;
 	}
 
 	@GetMapping
-	public List<Book> getBooks() {
-		return bookRepo.findAll();
+	public ResponseEntity<List<Book>> getBooks() {
+		return ResponseEntity.ok(bookService.getBooks());
 	}
 
 	@RequestMapping(path = "/{isbn}", method = { RequestMethod.GET })
-	public Book getByIsbn(@PathVariable("isbn") Long isbn) {
-		if (bookRepo.existsById(isbn)) {
-			return bookRepo.findById(isbn).get();
-		}
-		throw new EntityNotFoundException("Book with ISBN " + isbn + " not found");
-	} // TODO develop with Optional?
+	public ResponseEntity<Book> getByIsbn(@PathVariable("isbn") Long isbn) {
+		return ResponseEntity.status(HttpStatus.OK).body(bookService.getByIsbn(isbn));
+	}
 
 	@PostMapping
-	public Book createBook(@RequestBody Book book) {
-		bookRepo.save(book);
-		return book;
+	public ResponseEntity<Book> createBook(@Valid @RequestBody Book book) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Location", "/books/" + String.valueOf(book.getIsbn()));
+		
+		return new ResponseEntity<Book>(bookService.createBook(book), headers, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{isbn}")
-	public Book updateBook(@PathVariable("isbn") Long isbn, @RequestBody Book book) {
-		if (bookRepo.existsById(isbn)) {
-			Book bookInDb = bookRepo.findById(isbn).get();
-			// update each field
-			bookInDb.setTitle(book.getTitle());
-			bookInDb.setAuthorSurname(book.getAuthorSurname());
-			bookInDb.setAuthorForename(book.getAuthorForename());
-			bookInDb.setPubYear(book.getPubYear());
-			bookInDb.setDigital(book.isDigital());
-			bookInDb.setPublisher(book.getPublisher());
-			bookInDb.setGenreCode(book.getGenreCode());
-
-			return bookRepo.findById(isbn).get();
-		} else {
-			book.setIsbn(isbn);
-			return bookRepo.save(book);
-		}
+	public ResponseEntity<Book> updateBook(@PathVariable("isbn") Long isbn, @Valid @RequestBody Book book) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Location", "/books/" + String.valueOf(isbn));
+		
+		return new ResponseEntity<Book>(bookService.updateBook(isbn, book), headers, HttpStatus.ACCEPTED);
 	}
 
 	@DeleteMapping("/{isbn}")
-	public void deleteByIsbn(@PathVariable("isbn") Long isbn) {
-		if (bookRepo.existsById(isbn)) {
-			Book deletedBook = bookRepo.findById(isbn).get();
-			bookRepo.deleteById(isbn);
-			System.out.println(deletedBook + " has been deleted.");
-		} else {
-			throw new EntityNotFoundException("Book with ISBN " + isbn + " not found");
-		}
+	public ResponseEntity<?> deleteByIsbn(@PathVariable("isbn") Long isbn) {
+		bookService.deleteByIsbn(isbn);
+		return ResponseEntity.accepted().build();
 	}
 }
