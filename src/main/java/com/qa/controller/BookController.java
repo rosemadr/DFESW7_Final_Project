@@ -19,7 +19,6 @@ import com.qa.data.entity.Book;
 
 @RestController
 @RequestMapping(path ="/books")
-
 public class BookController {
 	
 	private List<Book> books = new ArrayList<>(List.of(new Book(9781492077992l, "Head First Design Patterns", "Freeman","Eric", 2020 , true, "O'Reilly", "UM"), 
@@ -48,10 +47,14 @@ public class BookController {
 	
 //	@PutMapping("/{isbn}")
 //	public Book updateBook(@PathVariable("isbn") Long isbn, @RequestBody Book book) {
-//		for (Book book : books) {
-//			if (book.getIsbn().equals(isbn)) {
+//		for (Book bookInList : books) {
+//			if (bookInList.getIsbn().equals(isbn)) {
 //				book.setAuthorForename(get)
 //}
 
 }
+		
+
+		
+
 

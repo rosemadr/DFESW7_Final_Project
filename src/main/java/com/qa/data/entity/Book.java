@@ -14,7 +14,6 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "Books")
-
 public class Book {
 	
 	@Id
@@ -52,6 +51,7 @@ public Book(@Min(999999999) Long isbn, @NotNull String title, @NotNull String au
 	this.isbn = isbn;
 	this.title = title;
 	this.authorSurname = authorSurname;
+	this.authorForename = authorForename;
 	this.pubYear = pubYear;
 	this.isDigital = isDigital;
 	this.publisher = publisher;
