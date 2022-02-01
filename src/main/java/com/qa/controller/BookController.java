@@ -17,19 +17,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.data.entity.Book;
+import com.qa.data.repository.BookRepository;
 
 @RestController
 @RequestMapping(path ="/books")
 public class BookController {
 	
-	private List<Book> books = new ArrayList<>(List.of(new Book(9781492077992l, 
-			"Head First Design Patterns", "Freeman","Eric", 2020 , true, "O'Reilly", "UM"), 
-			new Book(9780140237504l, "The Catcher in the Rye", "Salinger", "J.D.", 1946, false, "Penguin", "FB")));
-	
+//	private List<Book> books = new ArrayList<>(List.of(new Book(9781492077992l, 
+//			"Head First Design Patterns", "Freeman","Eric", 2020 , true, "O'Reilly", "UM"), 
+//			new Book(9780140237504l, "The Catcher in the Rye", "Salinger", "J.D.", 1946, false, "Penguin", "FB")));
+//	
+	private BookRepository bookRepo;
 	
 	@GetMapping
 	public List<Book> getBooks() {
-		return books;
+		return this.bookRepo.findAll();
 	}
 	
 	@RequestMapping(path ="/{isbn}", method = {RequestMethod.GET} )
