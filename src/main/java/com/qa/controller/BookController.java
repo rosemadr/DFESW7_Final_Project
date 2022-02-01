@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,6 +65,20 @@ public class BookController {
 		} throw new EntityNotFoundException();
 	}
 	
+	@DeleteMapping("/{isbn}")
+	public void deleteByIsbn(@PathVariable("isbn") Long isbn) {
+		for (Book book : books) {
+			if (book.getIsbn().equals(isbn)) {
+				int index = books.indexOf(book);
+				Book bookToDelete = books.get(index);
+				books.remove(bookToDelete);
+				System.out.println(bookToDelete + " has been deleted.");
+			} else {
+				throw new EntityNotFoundException("Book with ISBN " + isbn + " not found");
+			}
+	} 
+	
+}
 }
 				
 		
