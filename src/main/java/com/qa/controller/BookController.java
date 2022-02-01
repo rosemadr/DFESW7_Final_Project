@@ -43,8 +43,8 @@ public class BookController {
 	
 	@RequestMapping(path ="/{isbn}", method = {RequestMethod.GET} )
 	public Book getByIsbn(@PathVariable("isbn") Long isbn) {
-		if (bookRepo.findById(isbn).equals(isbn)) {
-				return bookRepo.findById(isbn).get() ;
+		if (bookRepo.existsById(isbn)) {
+				return bookRepo.findById(isbn).get();
 			} throw new EntityNotFoundException("Book with ISBN " + isbn + " not found");
 	} // TODO develop with Optional?
 	
@@ -56,36 +56,39 @@ public class BookController {
 	
 	@PutMapping("/{isbn}")
 	public Book updateBook(@PathVariable("isbn") Long isbn, @RequestBody Book book) {
-		for (Book bookInList : books) {
-			if (bookInList.getIsbn().equals(isbn)) {
-				bookInList.setTitle(book.getTitle());
-				bookInList.setAuthorSurname(book.getAuthorSurname());
-				bookInList.setAuthorForename(book.getAuthorForename());
-				bookInList.setPubYear(book.getPubYear());
-				bookInList.setDigital(book.isDigital());
-				bookInList.setPublisher(book.getPublisher());
-				bookInList.setGenreCode(book.getGenreCode());
-				
-				return bookInList;
-			} 
-				
-		} throw new EntityNotFoundException();
-	}
-	
-	@DeleteMapping("/{isbn}")
-	public void deleteByIsbn(@PathVariable("isbn") Long isbn) {
-		for (Book book : books) {
-			if (book.getIsbn().equals(isbn)) {
-				int index = books.indexOf(book);
-				Book bookToDelete = books.get(index);
-				books.remove(bookToDelete);
-				System.out.println(bookToDelete + " has been deleted.");
-			} else {
-				throw new EntityNotFoundException("Book with ISBN " + isbn + " not found");
+			if (bookRepo.existsById(isbn)) {
+				Book bookInDb = bookRepo.getById(isbn);
+				//update each field
+				bookInDb.setTitle(book.getTitle());
+				bookInDb.setAuthorSurname(book.getAuthorSurname());
+				bookInDb.setAuthorForename(book.getAuthorForename());
+				bookInDb.setPubYear(book.getPubYear());
+				bookInDb.setDigital(book.isDigital());
+				bookInDb.setPublisher(book.getPublisher());
+				bookInDb.setGenreCode(book.getGenreCode());
 			}
-	} 
-	
-}
+				
+				return bookRepo.findById(isbn).get();
+			} 
+			
+
+//				
+//		} throw new EntityNotFoundException();
+//	}
+//	
+//	@DeleteMapping("/{isbn}")
+//	public void deleteByIsbn(@PathVariable("isbn") Long isbn) {
+//		for (Book book : books) {
+//			if (book.getIsbn().equals(isbn)) {
+//				int index = books.indexOf(book);
+//				Book bookToDelete = books.get(index);
+//				books.remove(bookToDelete);
+//				System.out.println(bookToDelete + " has been deleted.");
+//			} else {
+//				throw new EntityNotFoundException("Book with ISBN " + isbn + " not found");
+//			}
+//	} 
+//	
 }
 				
 		
