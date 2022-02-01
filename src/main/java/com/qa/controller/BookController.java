@@ -46,14 +46,26 @@ public class BookController {
 		return book;
 	}
 	
-//	@PutMapping("/{isbn}")
-//	public Book updateBook(@PathVariable("isbn") Long isbn, @RequestBody Book book) {
-//		for (Book bookInList : books) {
-//			if (bookInList.getIsbn().equals(isbn)) {
-//				book.setAuthorForename(get)
-//}
-
+	@PutMapping("/{isbn}")
+	public Book updateBook(@PathVariable("isbn") Long isbn, @RequestBody Book book) {
+		for (Book bookInList : books) {
+			if (bookInList.getIsbn().equals(isbn)) {
+				bookInList.setTitle(book.getTitle());
+				bookInList.setAuthorSurname(book.getAuthorSurname());
+				bookInList.setAuthorForename(book.getAuthorForename());
+				bookInList.setPubYear(book.getPubYear());
+				bookInList.setDigital(book.isDigital());
+				bookInList.setPublisher(book.getPublisher());
+				bookInList.setGenreCode(book.getGenreCode());
+				
+				return bookInList;
+			} 
+				
+		} throw new EntityNotFoundException();
+	}
+	
 }
+				
 		
 
 		
