@@ -115,7 +115,6 @@ public class BookControllerSystemIntegrationTests {
 
 	@Test
 	public void updateBookTest() throws Exception {
-
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.PUT,
 				"/books/9781492077992");
 		// specifying accept header return type
@@ -127,8 +126,13 @@ public class BookControllerSystemIntegrationTests {
 				.json(objectMapper.writeValueAsString(bookUpdateInfo));
 
 		mockMvc.perform(mockRequest).andExpect(statusMatcher).andExpect(contentMatcher);
-
-		// TODO fix 202 error
 	}
 
+	@Test
+	public void deleteByIsbn() throws Exception {
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.DELETE,
+				"/books/9781492077992");
+		ResultMatcher statusMatcher = MockMvcResultMatchers.status().isAccepted();
+		mockMvc.perform(mockRequest).andExpect(statusMatcher);
+	}
 }
