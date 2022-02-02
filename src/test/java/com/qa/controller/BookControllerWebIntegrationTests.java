@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -70,7 +71,9 @@ public class BookControllerWebIntegrationTests {
 	@Test
 	public void createBookTest() {
 		// given
-		ResponseEntity<Book> expected = ResponseEntity.status(HttpStatus.CREATED).body(testBook);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Location", "/books/9780141182902");
+		ResponseEntity<Book> expected = new ResponseEntity<Book>(testBook, headers, HttpStatus.CREATED);
 		// when
 		when(bookService.createBook(testBook)).thenReturn(testBook);
 		// then
