@@ -66,4 +66,18 @@ public class BookControllerWebIntegrationTests {
 		verify(bookService, times(1)).getByIsbn(9780141182902l);
 
 	}
+
+	@Test
+	public void createBookTest() {
+		// given
+		ResponseEntity<Book> expected = ResponseEntity.status(HttpStatus.CREATED).body(testBook);
+		// when
+		when(bookService.createBook(testBook)).thenReturn(testBook);
+		// then
+		ResponseEntity<Book> actual = controller.createBook(testBook);
+		assertThat(expected).isEqualTo(actual);
+		// verify service called
+		verify(bookService, times(1)).createBook(testBook);
+
+	}
 }
