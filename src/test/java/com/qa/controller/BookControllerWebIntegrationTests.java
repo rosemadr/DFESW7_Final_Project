@@ -30,14 +30,14 @@ public class BookControllerWebIntegrationTests {
 
 	// test data
 	private List<Book> books = new ArrayList<>();
-	private Book bookToCreate;
+	private Book testBook;
 
 	@BeforeEach
 	public void init() {
 		books.addAll(List.of(
 				new Book(9781492077992l, "Head First Design Patterns", "Freeman", "Eric", 2020, true, "O'Reilly", "UM"),
 				new Book(9780140237504l, "The Catcher in the Rye", "Salinger", "J.D.", 1946, false, "Penguin", "FB")));
-		bookToCreate = new Book(9780141182902l, "The Trail", "Kafka", "Franz", 1925, false, "Penguin", "FB");
+		testBook = new Book(9780141182902l, "The Trail", "Kafka", "Franz", 1925, false, "Penguin", "FB");
 	}
 
 	@Test
@@ -51,5 +51,19 @@ public class BookControllerWebIntegrationTests {
 		assertThat(expected).isEqualTo(actual);
 		// verify service called
 		verify(bookService, times(1)).getBooks();
+	}
+
+	@Test
+	public void getByIsbnTest() {
+		// given
+		ResponseEntity<Book> expected = ResponseEntity.status(HttpStatus.OK).body(testBook);
+		// when
+		when(bookService.getByIsbn(9780141182902l)).thenReturn(testBook);
+		// then
+		ResponseEntity<Book> actual = controller.getByIsbn(9780141182902l);
+		assertThat(expected).isEqualTo(actual);
+		// verify service called
+		verify(bookService, times(1)).getByIsbn(9780141182902l);
+
 	}
 }
