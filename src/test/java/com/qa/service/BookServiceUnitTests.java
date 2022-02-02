@@ -64,9 +64,33 @@ public class BookServiceUnitTests {
 
 	@Test
 	public void createBook() {
-		//when
+		// when
 		when(repository.save(testBook)).thenReturn(testBook);
 		// assert
-		assertThat(bookSer)
+		assertThat(bookService.createBook(testBook)).isEqualTo(testBook);
+		// verify
+		verify(repository).save(testBook);
 	}
+
+	@Test
+	public void updateBook() {
+		// when
+		when(repository.findById(testBookIsbn).get()).thenReturn(testBook);
+		// assert
+		assertThat(bookService.updateBook(testBookIsbn, testBook)).isEqualTo(testBook);
+		// verify
+		verify(repository).findById(testBookIsbn).get();
+
+	}
+
+	@Test
+	public void updateBookSave() {
+		// when
+		when(repository.save(testBook)).thenReturn(testBook);
+		// assert
+		assertThat(bookService.updateBook(testBookIsbn, testBook)).isEqualTo(testBook);
+		// verify
+		verify(repository).save(testBook);
+	}
+
 }
