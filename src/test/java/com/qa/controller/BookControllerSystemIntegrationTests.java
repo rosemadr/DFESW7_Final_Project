@@ -38,6 +38,7 @@ public class BookControllerSystemIntegrationTests {
 
 	// test data
 	private List<Book> booksInDb = new ArrayList<>();
+	private Book testBook;
 
 	@BeforeEach
 	public void init() {
@@ -58,6 +59,24 @@ public class BookControllerSystemIntegrationTests {
 		// result matcher
 		ResultMatcher statusMatcher = MockMvcResultMatchers.status().isOk();
 		ResultMatcher contentMatcher = MockMvcResultMatchers.content().json(books);
+		// request and assert
+		mockMvc.perform(mockRequest).andExpect(statusMatcher).andExpect(contentMatcher);
+	}
+
+	@Test
+	public void getByIsbnTest() throws Exception {
+		testBook = new Book(9781492077992l, "Head First Design Patterns", "Freeman", "Eric", 2020, true, "O'Reilly",
+				"UM");
+		// mock http request builder
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.GET,
+				"/books/9781492077992");
+		// specifying accept header return type
+		mockRequest.accept(MediaType.APPLICATION_JSON);
+		// JSON string for obj mapper
+		String testBookStr = objectMapper.writeValueAsString(testBook);
+		// result matcher
+		ResultMatcher statusMatcher = MockMvcResultMatchers.status().isOk();
+		ResultMatcher contentMatcher = MockMvcResultMatchers.content().json(testBookStr);
 		// request and assert
 		mockMvc.perform(mockRequest).andExpect(statusMatcher).andExpect(contentMatcher);
 	}
