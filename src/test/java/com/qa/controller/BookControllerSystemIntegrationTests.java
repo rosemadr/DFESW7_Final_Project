@@ -46,6 +46,8 @@ public class BookControllerSystemIntegrationTests {
 				new Book(9781492077992l, "Head First Design Patterns", "Freeman", "Eric", 2020, true, "O'Reilly", "UM"),
 				new Book(9780140237504l, "The Catcher in the Rye", "Salinger", "J.D.", 1946, false, "Penguin", "FB"));
 		booksInDb.addAll(repository.saveAll(books));
+		testBook = new Book(9781492077992l, "Head First Design Patterns", "Freeman", "Eric", 2020, true, "O'Reilly",
+				"UM");
 	}
 
 	@Test
@@ -65,8 +67,6 @@ public class BookControllerSystemIntegrationTests {
 
 	@Test
 	public void getByIsbnTest() throws Exception {
-		testBook = new Book(9781492077992l, "Head First Design Patterns", "Freeman", "Eric", 2020, true, "O'Reilly",
-				"UM");
 		// mock http request builder
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.GET,
 				"/books/9781492077992");
@@ -79,6 +79,26 @@ public class BookControllerSystemIntegrationTests {
 		ResultMatcher contentMatcher = MockMvcResultMatchers.content().json(testBookStr);
 		// request and assert
 		mockMvc.perform(mockRequest).andExpect(statusMatcher).andExpect(contentMatcher);
+	}
+
+	@Test
+	public void createBookTest() throws Exception {
+		// test object
+		Book expectedTestBook = new Book(testBook.getIsbn(), testBook.getTitle(), testBook.getAuthorSurname(),
+				testBook.getAuthorForename(), testBook.getPubYear(), testBook.isDigital(), testBook.getPublisher(),
+				testBook.getGenreCode());
+		// mock request
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.POST, "/books");
+		// specifying accept header return type
+		mockRequest.contentType(MediaType.APPLICATION_JSON); 
+		mockRequest.content(objectMapper.writeValueAsString(testBook));
+		
+		mockRequest.accept(MediaType.APPLICATION_JSON);
+		ResultMatcher statusMatcher = MockMvcResultMatchers.status().isCreated();
+		ResultMatcher contentMatcher = MockMvcResultMatchers.content().json(objectMapper.writeValueAsString(expectedTestBook));
+		
+		mockMvc.perform(mockRequest).andExpect(statusMatcher).andExpect(contentMatcher);
+		
 	}
 
 }
