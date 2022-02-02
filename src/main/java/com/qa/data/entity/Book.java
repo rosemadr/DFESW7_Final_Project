@@ -53,6 +53,18 @@ public class Book {
 
 	}
 
+	public Book(@NotNull String title, @NotNull String authorSurname, String authorForename, int pubYear,
+			@NotNull boolean isDigital, String publisher, String genreCode) {
+		super();
+		this.title = title;
+		this.authorSurname = authorSurname;
+		this.authorForename = authorForename;
+		this.pubYear = pubYear;
+		this.isDigital = isDigital;
+		this.publisher = publisher;
+		this.genreCode = genreCode;
+	}
+
 	public Book() {
 		super();
 	}
