@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -75,11 +78,12 @@ public class BookServiceUnitTests {
 	@Test
 	public void updateBook() { // test fails? TODO
 		// when
+		when(repository.existsById(testBookIsbn)).thenReturn(true);
 		when(repository.findById(testBookIsbn)).thenReturn(Optional.of(testBook));
 		// assert
 		assertThat(bookService.updateBook(testBookIsbn, testBook)).isEqualTo(testBook);
 		// verify
-		verify(repository).findById(testBookIsbn).get();
+		verify(repository, times(2)).findById(testBookIsbn).get();
 
 	}
 
@@ -91,6 +95,30 @@ public class BookServiceUnitTests {
 		assertThat(bookService.updateBook(testBookIsbn, testBook)).isEqualTo(testBook);
 		// verify
 		verify(repository).save(testBook);
+	}
+
+	@Test
+	public void deleteByIsbn() {
+		// when
+		when(repository.existsById(testBookIsbn)).thenReturn(true);
+		// assert
+		bookService.deleteByIsbn(testBookIsbn);
+		// verify
+		verify(repository).existsById(testBookIsbn);
+		verify(repository).deleteById(testBookIsbn);
+	}
+
+	@Test
+	public void deleteByIsbnException() {
+		when(repository.existsById(testBookIsbn)).thenReturn(false);
+		// assert
+		EntityNotFoundException notFound = Assertions.assertThrows(EntityNotFoundException.class, () -> {
+			bookService.deleteByIsbn(testBookIsbn);
+		});
+		// assert
+		String expectedMessage = "Book with ISBN " + testBookIsbn + " not found";
+		assertThat(notFound.getMessage()).isEqualTo(expectedMessage);
+		verify(repository).existsById(testBookIsbn);
 	}
 
 }
