@@ -48,11 +48,12 @@ public class BookService {
 			bookInDb.setPublisher(book.getPublisher());
 			bookInDb.setGenreCode(book.getGenreCode());
 
-			return bookRepo.findById(isbn).get();
+			return bookRepo.save(book);
 		} else {
 			book.setIsbn(isbn);
 			return bookRepo.save(book);
 		}
+
 	}
 
 	public void deleteByIsbn(Long isbn) {
