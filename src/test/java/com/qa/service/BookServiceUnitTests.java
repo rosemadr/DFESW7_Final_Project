@@ -56,7 +56,7 @@ public class BookServiceUnitTests {
 	}
 
 	@Test
-	public void getByIsbnTest() { // TODO fix test fail, entity not found
+	public void getByIsbnTest() {
 		// when
 		when(repository.existsById(testBookIsbn)).thenReturn(true);
 		when(repository.findById(testBookIsbn)).thenReturn(Optional.of(testBook));
@@ -64,6 +64,19 @@ public class BookServiceUnitTests {
 		assertThat(bookService.getByIsbn(testBookIsbn)).isEqualTo(testBook);
 		// verify
 		verify(repository).findById(testBookIsbn);
+	}
+
+	@Test
+	public void getByIsbnException() {
+		when(repository.existsById(testBookIsbn)).thenReturn(false);
+
+		EntityNotFoundException notFound = Assertions.assertThrows(EntityNotFoundException.class, () -> {
+			bookService.getByIsbn(testBookIsbn);
+		});
+		// assert
+		String expectedMessage = "Book with ISBN " + testBookIsbn + " not found";
+		assertThat(notFound.getMessage()).isEqualTo(expectedMessage);
+		verify(repository).existsById(testBookIsbn);
 	}
 
 	@Test
@@ -78,25 +91,32 @@ public class BookServiceUnitTests {
 
 	@Test
 	public void updateBook() { // test fails? TODO
+
+		Book bookWithUpdatesToMake = new Book(testBook.getIsbn(), testBook.getTitle() + ", Second Edition",
+				testBook.getAuthorSurname(), testBook.getAuthorForename(), testBook.getPubYear(), testBook.isDigital(),
+				testBook.getPublisher(), testBook.getGenreCode());
 		// when
 		when(repository.existsById(testBookIsbn)).thenReturn(true);
 		when(repository.findById(testBookIsbn)).thenReturn(Optional.of(testBook));
+		when(repository.save(testBook)).thenReturn(bookWithUpdatesToMake);
 		// assert
-		assertThat(bookService.updateBook(testBookIsbn, testBook)).isEqualTo(testBook);
+		assertThat(bookService.updateBook(testBookIsbn, bookWithUpdatesToMake)).isEqualTo(bookWithUpdatesToMake);
 		// verify
-		verify(repository).findById(testBookIsbn).get();
-
-	}
-
-	@Test
-	public void updateBookSave() {
-		// when
-		when(repository.save(testBook)).thenReturn(testBook);
-		// assert
-		assertThat(bookService.updateBook(testBookIsbn, testBook)).isEqualTo(testBook);
-		// verify
+		verify(repository).existsById(testBookIsbn);
+		verify(repository).findById(testBookIsbn);
 		verify(repository).save(testBook);
+
 	}
+
+//	@Test
+//	public void updateBookException() {
+//		// when
+//		when(repository.save(testBook)).thenReturn(testBook);
+//		// assert
+//		assertThat(bookService.updateBook(testBookIsbn, testBook)).isEqualTo(testBook);
+//		// verify
+//		verify(repository).save(testBook);
+//	}
 
 	@Test
 	public void deleteByIsbn() {
