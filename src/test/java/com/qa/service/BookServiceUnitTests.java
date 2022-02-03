@@ -73,9 +73,9 @@ public class BookServiceUnitTests {
 	}
 
 	@Test
-	public void updateBook() {
+	public void updateBook() { // test fails? TODO
 		// when
-		when(repository.findById(testBookIsbn).get()).thenReturn(testBook);
+		when(repository.findById(testBookIsbn)).thenReturn(Optional.of(testBook));
 		// assert
 		assertThat(bookService.updateBook(testBookIsbn, testBook)).isEqualTo(testBook);
 		// verify
