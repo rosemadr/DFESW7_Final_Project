@@ -58,6 +58,7 @@ public class BookServiceUnitTests {
 	@Test
 	public void getByIsbnTest() { // TODO fix test fail, entity not found
 		// when
+		when(repository.existsById(testBookIsbn)).thenReturn(true);
 		when(repository.findById(testBookIsbn)).thenReturn(Optional.of(testBook));
 		// assert
 		assertThat(bookService.getByIsbn(testBookIsbn)).isEqualTo(testBook);
@@ -83,7 +84,7 @@ public class BookServiceUnitTests {
 		// assert
 		assertThat(bookService.updateBook(testBookIsbn, testBook)).isEqualTo(testBook);
 		// verify
-		verify(repository, times(2)).findById(testBookIsbn).get();
+		verify(repository).findById(testBookIsbn).get();
 
 	}
 
