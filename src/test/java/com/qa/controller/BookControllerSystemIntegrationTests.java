@@ -116,7 +116,7 @@ public class BookControllerSystemIntegrationTests {
 	@Test
 	public void updateBookTest() throws Exception {
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.PUT,
-				"/books/9781492077992");
+				"/books/" + bookUpdateInfo.getIsbn());
 		// specifying accept header return type
 		mockRequest.contentType(MediaType.APPLICATION_JSON);
 		mockRequest.content(objectMapper.writeValueAsString(bookUpdateInfo));
@@ -131,7 +131,7 @@ public class BookControllerSystemIntegrationTests {
 	@Test
 	public void deleteByIsbn() throws Exception {
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.DELETE,
-				"/books/9781492077992");
+				"/books/" + bookUpdateInfo.getIsbn());
 		ResultMatcher statusMatcher = MockMvcResultMatchers.status().isAccepted();
 		mockMvc.perform(mockRequest).andExpect(statusMatcher);
 	}
