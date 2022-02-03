@@ -1,9 +1,12 @@
 package com.qa.service;
 
 import java.util.List;
+
 import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.qa.data.entity.Book;
 import com.qa.data.repository.BookRepository;
 
@@ -54,9 +57,9 @@ public class BookService {
 
 	public void deleteByIsbn(Long isbn) {
 		if (bookRepo.existsById(isbn)) {
-			Book deletedBook = bookRepo.findById(isbn).get();
+//			Book deletedBook = bookRepo.findById(isbn).get();
 			bookRepo.deleteById(isbn);
-			System.out.println(deletedBook + " has been deleted.");
+//			System.out.println(deletedBook + " has been deleted.");
 		} else {
 			throw new EntityNotFoundException("Book with ISBN " + isbn + " not found");
 		}
