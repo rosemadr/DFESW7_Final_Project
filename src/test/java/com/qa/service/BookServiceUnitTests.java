@@ -108,15 +108,16 @@ public class BookServiceUnitTests {
 
 	}
 
-//	@Test
-//	public void updateBookException() {
-//		// when
-//		when(repository.save(testBook)).thenReturn(testBook);
-//		// assert
-//		assertThat(bookService.updateBook(testBookIsbn, testBook)).isEqualTo(testBook);
-//		// verify
-//		verify(repository).save(testBook);
-//	}
+	@Test
+	public void updateBookNewIsbn() { // testing when a new book (not in db) is fed into the updateBook() method
+		// when
+		when(repository.existsById(testBookIsbn)).thenReturn(false);
+		when(repository.save(testBook)).thenReturn(testBook);
+		// assert
+		assertThat(bookService.updateBook(testBookIsbn, testBook)).isEqualTo(testBook);
+		// verify
+		verify(repository).save(testBook);
+	}
 
 	@Test
 	public void deleteByIsbn() {
