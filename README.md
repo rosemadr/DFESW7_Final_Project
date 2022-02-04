@@ -11,6 +11,7 @@ The specifics of the objectives were
 > a managed database hosted locally or within the Cloud Provider examined during your Cloud Fundamentals module (e.g. H2 or MySQL (local / GCP) 
 > a means of making API calls (Postman) and a means of checking persistence (Workbench/H2 console)”
 
+# Project requirements and technologies used
 The project requirements were:
 * Code fully integrated into a Version Control System using the feature-branch model: main/dev/multiple features.
 * A project management board with full expansion on user stories, acceptance criteria and tasks needed to complete the project.
@@ -26,18 +27,16 @@ For my project I stuck with what I know and built on earlier work I had done dur
 My project used:
 
 |Technology |Function|Version|Website/download link|Eclipse Marketplace link/Maven dependency link|
-|:---       |:---      |:---   |:---   |:---                    |
-|Java |Programming language| ?? |[download](https://www.java.com/en/download/manual.jsp)| |
-|Spring Boot|Framework and inversion of control container for Java | ?? |[website](https://spring.io/projects/spring-boot) |[link](https://marketplace.eclipse.org/content/spring-tools-4-aka-spring-tool-suite-4)
-|H2 database |Java database | ?? | [website]((https://h2database.com/html/main.html)
-
-* Java programming language, [download the latest version here](https://www.java.com/en/download/manual.jsp)
-* Spring Boot framework and inversion of control container for Java, [eclipse marketplace link](https://marketplace.eclipse.org/content/spring-tools-4-aka-spring-tool-suite-4), [Spring website](https://spring.io/projects/spring-boot)
-* H2 database [H2 database website](https://h2database.com/html/main.html)
-* Maven
-* Postman API development support app [Postman website](https://www.postman.com/)
-* Git version control [Git website](https://git-scm.com/)
-* Jacoco [eclipse market place link](https://marketplace.eclipse.org/content/eclemma-java-code-coverage) https://marketplace.eclipse.org/content/eclemma-java-code-coverage
+|:---       |:---      |:---   |:---   |:---           |
+|Java |Programming language|Java 11 |[download](https://www.java.com/en/download/manual.jsp)| |
+|Spring Boot|Framework and inversion of control container for Java |2.6.3 |[website](https://spring.io/projects/spring-boot) |[link](https://marketplace.eclipse.org/content/spring-tools-4-aka-spring-tool-suite-4) |
+|H2 database |Java database |mangaed by Spring Boot |[website](https://h2database.com/html/main.html) | |
+|Maven |Build automation tool |3.8.4 |[download](https://maven.apache.org/download.cgi) | |
+|Postman |API development support app |9.12.0 |[website](https://www.postman.com/) | |
+|Git |Version control |2.24.3 |[website](https://git-scm.com/) | |
+|JUnit |Testing Framework |managed by Spring Boot??[website](https://junit.org/junit5/) |[maven repository link](https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api)|
+|Jacoco |Code coverage library |??|[website](https://www.jacoco.org/jacoco/) |[eclipse market place link for EclEmma code coverage tool](https://marketplace.eclipse.org/content/eclemma-java-code-coverage) | |
+|Mockito |Mocking framework for unit tests |??? |[website](https://site.mockito.org/) | |
 
 
 
@@ -94,7 +93,9 @@ Whilst I did have screenshots of Postman showing (almost) complete functionality
 
 
 ## Screenshots of your database to prove that data is being persisted.
+
 ## Screenshot of your test results, including coverage report.
+
 
 ## Jira Board 
 https://countzero.atlassian.net/jira/software/projects/DFPM/
