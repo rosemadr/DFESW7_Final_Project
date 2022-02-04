@@ -120,8 +120,9 @@ Some more advanced improvements for an expanded project:
 Whilst I did have screenshots of Postman showing (almost) complete functionality from day two of my project work, these have been lost as they were on my computer desktop ([see above](https://github.com/rosemadr/DFESW7_Final_Project/edit/documentation/README.md#the-saga-of-my-computer-issues)).
 
 
-
 ## Screenshots of database to prove that data is being persisted
+![Screenshot 2022-02-03 at 13 54 51](https://user-images.githubusercontent.com/25704939/152552234-27723577-cf54-49c1-82ae-db7b0e13bafd.png)
+*The Catcher in the Rye* has been added to the db on 3/2/2022.
 
 ## Screenshot of test results, including coverage report
 ![Screenshot 2022-02-04 at 11 36 50](https://user-images.githubusercontent.com/25704939/152546616-e6d3e182-12ea-4727-9ff1-0a3185ab4edc.png)
