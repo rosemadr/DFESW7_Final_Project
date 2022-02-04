@@ -1,5 +1,15 @@
-# Final Project
+# Library Project
 Final project from my DFE Software Development Bootcamp.
+
+## Contents
+1. [Why are we doing this?](https://github.com/rosemadr/DFESW7_Final_Project/edit/documentation/README.md#why-are-we-doing-this)
+2. [How I expected the challenge to go](https://github.com/rosemadr/DFESW7_Final_Project/blob/main/README.md#how-i-expected-the-challenge-to-go)
+3. [What went well? / What didn't go as planned?](https://github.com/rosemadr/DFESW7_Final_Project/blob/main/README.md#what-went-well--what-didnt-go-as-planned)
+4. [Possible improvements for future revisions of the project](https://github.com/rosemadr/DFESW7_Final_Project/edit/documentation/README.md#possible-improvements-for-future-revisions-of-the-project)
+5. [Screenshots showing postman requests and the output from the API](https://github.com/rosemadr/DFESW7_Final_Project/blob/main/README.md#screenshots-showing-your-postman-requests-and-the-output-from-the-api)
+6. [Screenshots of database to prove that data is being persisted](https://github.com/rosemadr/DFESW7_Final_Project/blob/main/README.md#screenshots-of-your-database-to-prove-that-data-is-being-persisted)
+7. [Screenshot of test results, including coverage report](https://github.com/rosemadr/DFESW7_Final_Project/blob/main/README.md#screenshot-of-your-test-results-including-coverage-report)
+8. [Jira board link](https://github.com/rosemadr/DFESW7_Final_Project/edit/documentation/README.md#jira-board-link)
 
 ## Why are we doing this?
 The final part of my QA Academy DFE Software Development Bootcamp was a practical project. This piece would combine and demonstrate the methodologies and technologies learnt throughout the course.
@@ -43,10 +53,11 @@ For my project I stuck with what I know and built on earlier work I had done dur
 |JUnit |Testing Framework |managed by Spring Boot |[website](https://junit.org/junit5/) |[maven repository link](https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api)|
 |Jacoco |Code coverage library |managed by Spring Boot |[website](https://www.jacoco.org/jacoco/) |[eclipse market place link for EclEmma code coverage tool](https://marketplace.eclipse.org/content/eclemma-java-code-coverage) | |
 |Mockito |Mocking framework for unit tests |managed by Spring Boot |[website](https://site.mockito.org/) | |
+|Jira |Online project management tool | |[website](https://www.atlassian.com/software/jira) | |
 
 </details>
 
-## How I expected the challenge to go.
+## How I expected the challenge to go
 
 I think I expected the project to go fairly well, even though I was less confident in, and had less experience of the Spring Boot framework than I might have liked. I had been using git and pushing my code up to GitHub over the last three weeks so I felt fairly confident in using git and GitHub. Whilst I still felt a bit unsure about my Java and testing skills, I did feel like I had a fairly robust theoretical knowledge and good notes and resources to rely on.
 
@@ -60,8 +71,9 @@ As could have been predicted, I think some of the weakest areas of my project we
 
 Some problems cannot be predicted as such. On the afternoon of day three of doing my project my laptop died. The hard drive failed and then failed to boot or even recognise that it existed.
 
+#### The saga of my computer issues
 <details>
-	<summary>The saga of my computer issues</summary>
+	<summary>Further details</summary>
 
 Luckily, I had been regularly pushing all my code to GitHub, so only lost the code for one test method. This mitigation ****** was exactly what I had written on my risk assessment two days prior. 
 
@@ -97,22 +109,28 @@ A few smaller functional changes which I would have liked to implement, had I mo
 * Implementing custom exceptions.
 * Adding functionality to check the validity of an ISBN (International Standard Book Number) entered. This could be use a [regex](https://www.oracle.com/technical-resources/articles/java/regex.html) package, or could be a program like [this](https://www.geeksforgeeks.org/program-check-isbn/).
 
-Some more advanced improvements
+Some more advanced improvements for an expanded project:
 * Adding custom queries for returning books of the same genre code (I used the [Thema subject categories scheme](https://ns.editeur.org/thema/en)) such that one could do a GET request to a url such as “/books/genre/general-fiction” and receive a list of all books with the genre code “FB”. (As I am using a recognised system like Thema, that data may be available online in a way that could potentially be collected and used automatically). Though the request in itself would not be hard, it would be the mapping of the genre url text and the genre code which would take more time.
 * As implied above, my Library project is very basic and is currently functioning more as book metadata storage. Therefore, further improvements would be adding user and loan entities and contenting them so that users could have loans of specific books.
-* Another avenue for expansion is that ISBNs actually contain quite a bit of data (see image below). Contained in the number sequence are values that map to a publishers, terretories or language groups and more. If my project could access such data then it would be possible to automate fields such as “publisher”. 
-
+* Another avenue for expansion is that ISBNs actually contain quite a bit of data (see image below). Contained in the number sequence are values that map to a publishers, terretories or language groups and more. If my project could access such data then it would be possible to automate fields such as “publisher”.
 <img align="centre" width="300" alt="Data elements contained in an 10 and 13 digit ISBN" src="https://upload.wikimedia.org/wikipedia/commons/8/84/ISBN_Details.svg">
 
-## Screenshots showing your postman requests and the output from the API.
+## Screenshots showing postman requests and the output from the API.
 
-Whilst I did have screenshots of Postman showing (almost) complete functionality from day two of my project work, these have been lost as they were on my computer desktop (see???).
+Whilst I did have screenshots of Postman showing (almost) complete functionality from day two of my project work, these have been lost as they were on my computer desktop ([see above](https://github.com/rosemadr/DFESW7_Final_Project/edit/documentation/README.md#the-saga-of-my-computer-issues)).
 
 
 
-## Screenshots of your database to prove that data is being persisted.
+## Screenshots of database to prove that data is being persisted
 
-## Screenshot of your test results, including coverage report.
+## Screenshot of test results, including coverage report
+![Screenshot 2022-02-04 at 11 36 50](https://user-images.githubusercontent.com/25704939/152546616-e6d3e182-12ea-4727-9ff1-0a3185ab4edc.png)
+20/20 tests passing, including web integration, system integration and unit testing.
+
+![Screenshot 2022-02-04 at 11 36 42](https://user-images.githubusercontent.com/25704939/152546608-9790f431-dda4-43a8-b1bd-11ab4a6e3a94.png)
+
+89.1% test coverage.
+
 
 
 ## [Jira Board Link](https://countzero.atlassian.net/jira/software/projects/DFPM/)
