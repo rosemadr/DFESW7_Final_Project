@@ -142,7 +142,7 @@ public class Book {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(authorSurname, genreCode, isDigital, isbn, pubYear, publisher, title);
+		return Objects.hash(authorSurname, authorForename, genreCode, isDigital, pubYear, publisher, title);
 	}
 
 	@Override
@@ -154,10 +154,10 @@ public class Book {
 		if (getClass() != obj.getClass())
 			return false;
 		Book other = (Book) obj;
-		return Objects.equals(authorSurname, other.authorSurname) && Objects.equals(genreCode, other.genreCode)
-				&& isDigital == other.isDigital && Objects.equals(isbn, other.isbn)
-				&& Objects.equals(pubYear, other.pubYear) && Objects.equals(publisher, other.publisher)
-				&& Objects.equals(title, other.title);
+		return Objects.equals(authorSurname, other.authorSurname)
+				&& Objects.equals(authorForename, other.authorForename) && Objects.equals(genreCode, other.genreCode)
+				&& isDigital == other.isDigital && Objects.equals(pubYear, other.pubYear)
+				&& Objects.equals(publisher, other.publisher) && Objects.equals(title, other.title);
 	}
 
 }
