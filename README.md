@@ -54,6 +54,7 @@ For my project I stuck with what I know and built on earlier work I had done dur
 |Jacoco |Code coverage library |managed by Spring Boot |[website](https://www.jacoco.org/jacoco/) |[eclipse market place link for EclEmma code coverage tool](https://marketplace.eclipse.org/content/eclemma-java-code-coverage) | |
 |Mockito |Mocking framework for unit tests |managed by Spring Boot |[website](https://site.mockito.org/) | |
 |Jira |Online project management tool | |[website](https://www.atlassian.com/software/jira) | |
+|GNU Bash |shell script |3.2.57(1) |[website](https://www.gnu.org/software/bash/) | |
 
 </details>
 
@@ -64,7 +65,7 @@ I think I expected the project to go fairly well, even though I was less confide
 ## What went well? / What didn't go as planned?
 
 ### Strengths:
-I chose to build up the app from a very basic functioning version containing only controller and entity classes, without repository or service classes. This meant the project took longer than it might have done because it added more steps, the initial code contained some elements that were not used in the final product and conversely, the final product with the integrated service and repository classes contained some new code not in this first version. However, despite the time and effort this process took, I believe it was well spent as it meant I had a functioning app pretty much all the way along, apart from some odd bugs. 
+I chose to build up the app from a very basic functioning version containing only controller and entity classes, without repository or service classes. This meant the project took longer than it might have done because it added more steps, the initial code contained some elements that were not used in the final product and conversely, the final product with the integrated service and repository classes contained some new code not in this first version. However, despite the time and effort this process took, I believe it was well spent as it meant I had a functioning app pretty much all the way along, apart from some odd bugs. I refactored my code incrementally and made sure new components were fully integrated into a functioning app before expanding further.
 
 ### Weaknesses and troubleshooting:
 As could have been predicted, I think some of the weakest areas of my project were the ones where my learning was quite a while ago, or I had spent less time on the topics. Apart from git, which I had been practicing, my knowledge of Jira software and the epic, user story and task model was rusty. Similarly, using the Spring Boot system was slower, as my theoretical understanding of the frameworks was less cemented.
