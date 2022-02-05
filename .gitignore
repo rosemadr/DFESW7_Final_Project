@@ -11,7 +11,7 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
+.jar
 *.war
 *.nar
 *.ear
@@ -29,7 +29,7 @@ target/
 !**/src/test/**/target/
 
 ### Test db file ###
-testDb.mv.db
+*.db
 
 ### STS ###
 .apt_generated
