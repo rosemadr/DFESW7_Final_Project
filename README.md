@@ -120,11 +120,37 @@ Some more advanced improvements for an expanded project:
 ## Screenshots showing postman requests and the output from the API.
 
 Whilst I did have screenshots of Postman showing (almost) complete functionality from day two of my project work, these have been lost as they were on my computer desktop ([see above](https://github.com/rosemadr/DFESW7_Final_Project/edit/documentation/README.md#the-saga-of-my-computer-issues)).
+![Screenshot 2022-02-05 at 15 21 25](https://user-images.githubusercontent.com/25704939/152648118-06910dff-1328-42ee-8695-9f9c47c369bf.png)
+Adding the book *V for Vendetta* using a POST request to localhost:8080/books. The request response is the book that has been inputted.
 
+![Screenshot 2022-02-05 at 15 21 39](https://user-images.githubusercontent.com/25704939/152648120-ee4e6f72-b7d6-4043-bcad-76ca020e0397.png)
+A GET request to localhost:8080/books, which gets a list of all books. You can see the newly added *V for Vendetta*.
+
+![Screenshot 2022-02-05 at 15 23 42](https://user-images.githubusercontent.com/25704939/152648123-d0c4eb95-5568-4eea-a240-e6c09afe4809.png)
+A DELETE request to localhost:8080/books/9780316449052. That is the ISBN of *Rosewater*.
+
+![Screenshot 2022-02-05 at 15 23 48](https://user-images.githubusercontent.com/25704939/152648124-947b92d6-f97c-4ef3-8060-eb1a7dac5c6e.png)
+The previous DELETE request has worked and *Rosewater* is no longer returned in a GET to localhost:8080/books.
+
+![Screenshot 2022-02-05 at 15 28 00](https://user-images.githubusercontent.com/25704939/152648128-d73d4bdd-3778-4fc0-b23c-d56b9cf45188.png)
+*The Heart of the Race* has been posted to the api.
+
+![Screenshot 2022-02-05 at 15 29 56](https://user-images.githubusercontent.com/25704939/152648130-9281df78-f627-4e88-b121-009e5f1a2827.png)
+A PUT request is used to edit the data for *Heart of the Race*.
+
+![Screenshot 2022-02-05 at 15 30 00](https://user-images.githubusercontent.com/25704939/152648131-22367461-da58-4b31-8cc7-564e5f314999.png)
+![Screenshot 2022-02-05 at 15 30 07](https://user-images.githubusercontent.com/25704939/152648133-4b925468-f0d4-488b-b18a-d30759b49a93.png)
+
+![Screenshot 2022-02-05 at 15 43 13](https://user-images.githubusercontent.com/25704939/152648507-a0108f18-9b60-4a9a-9f2b-292468267eaf.png)
+A GET request to localhost:8080/books/9781786635860, which retrieves *The Heart of the Race*.
 
 ## Screenshots of database to prove that data is being persisted
 ![Screenshot 2022-02-03 at 13 54 51](https://user-images.githubusercontent.com/25704939/152552234-27723577-cf54-49c1-82ae-db7b0e13bafd.png)
 *The Catcher in the Rye* has been added to the db on 3/2/2022.
+
+![Screenshot 2022-02-05 at 15 45 52](https://user-images.githubusercontent.com/25704939/152648588-15726028-3d73-46c5-9852-d8aeb67721fa.png)
+A SELECT * FROM Books query shows all books in the database. Including *The Catcher in the Rye* which was added two days prior.
+
 
 ## Screenshot of test results, including coverage report
 ![Screenshot 2022-02-04 at 11 36 50](https://user-images.githubusercontent.com/25704939/152546616-e6d3e182-12ea-4727-9ff1-0a3185ab4edc.png)
@@ -133,7 +159,6 @@ Whilst I did have screenshots of Postman showing (almost) complete functionality
 ![Screenshot 2022-02-04 at 11 36 42](https://user-images.githubusercontent.com/25704939/152546608-9790f431-dda4-43a8-b1bd-11ab4a6e3a94.png)
 
 89.1% test coverage.
-
 
 
 ## [Jira Board Link](https://countzero.atlassian.net/jira/software/projects/DFPM/)
