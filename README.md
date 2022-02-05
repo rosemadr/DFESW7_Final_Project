@@ -109,7 +109,7 @@ In adition to a predictable amount of bugs that cropped up in my code which I wa
 A few smaller functional changes which I would have liked to implement, had I more time are:
 * Utilising optionals so that incorrect requests would not cause a program shutdown.
 * Implementing custom exceptions.
-* Adding functionality to check the validity of an ISBN (International Standard Book Number) entered. This could be use a [regex](https://www.oracle.com/technical-resources/articles/java/regex.html) package, or could be a program like [this](https://www.geeksforgeeks.org/program-check-isbn/).
+* Adding functionality to check the validity of an ISBN (International Standard Book Number) entered. This could be use a [regex](https://www.oracle.com/technical-resources/articles/java/regex.html) package, or could be a script like [this](https://www.geeksforgeeks.org/program-check-isbn/).
 
 Some more advanced improvements for an expanded project:
 * Adding custom queries for returning books of the same genre code (I used the [Thema subject categories scheme](https://ns.editeur.org/thema/en)) such that one could do a GET request to a url such as “/books/genre/general-fiction” and receive a list of all books with the genre code “FB”. (As I am using a recognised system like Thema, that data may be available online in a way that could potentially be collected and used automatically). Though the request in itself would not be hard, it would be the mapping of the genre url text and the genre code which would take more time.
