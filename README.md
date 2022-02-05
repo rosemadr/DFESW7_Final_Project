@@ -113,7 +113,7 @@ A few smaller functional changes which I would have liked to implement, had I mo
 
 Some more advanced improvements for an expanded project:
 * Adding custom queries for returning books of the same genre code (I used the [Thema subject categories scheme](https://ns.editeur.org/thema/en)) such that one could do a GET request to a url such as “/books/genre/general-fiction” and receive a list of all books with the genre code “FB”. (As I am using a recognised system like Thema, that data may be available online in a way that could potentially be collected and used automatically). Though the request in itself would not be hard, it would be the mapping of the genre url text and the genre code which would take more time.
-* As implied above, my Library project is very basic and is currently functioning more as book metadata storage. Therefore, further improvements would be adding user and loan entities and contenting them so that users could have loans of specific books.
+* As implied above, my Library project is very basic and is currently functioning more as book metadata storage. Therefore, further improvements would be adding user and loan entities and connecting them so that users could have loans of specific books.
 * Another avenue for expansion is that ISBNs actually contain quite a bit of data (see image below). Contained in the number sequence are values that map to a publishers, terretories or language groups and more. If my project could access such data then it would be possible to automate fields such as “publisher”.
 <img align="centre" width="300" alt="Data elements contained in an 10 and 13 digit ISBN" src="https://upload.wikimedia.org/wikipedia/commons/8/84/ISBN_Details.svg">
 
@@ -126,15 +126,15 @@ Whilst I did have screenshots of Postman showing (almost) complete functionality
 #### Create functionality
 
 ![Screenshot 2022-02-05 at 15 21 25](https://user-images.githubusercontent.com/25704939/152648118-06910dff-1328-42ee-8695-9f9c47c369bf.png)
-Adding the book *V for Vendetta* using a POST request to localhost:8080/books. The request response is the book that has been inputted.
+Adding the book *V for Vendetta* using a POST request to localhost:8080/books. The request response is a 201 Created status and the book which has been inputted.
 
 #### Read functionality
 ![Screenshot 2022-02-05 at 15 21 39](https://user-images.githubusercontent.com/25704939/152648120-ee4e6f72-b7d6-4043-bcad-76ca020e0397.png)
-A GET request to localhost:8080/books, which gets a list of all books. You can see the newly added *V for Vendetta*.
+A GET request to localhost:8080/books, which gets a list of all books and a 200 OK status. You can see the newly added *V for Vendetta*.
 
 #### Delete functionality
 ![Screenshot 2022-02-05 at 15 23 42](https://user-images.githubusercontent.com/25704939/152648123-d0c4eb95-5568-4eea-a240-e6c09afe4809.png)
-A DELETE request to localhost:8080/books/9780316449052. That is the ISBN of *Rosewater*.
+A DELETE request to localhost:8080/books/9780316449052. That is the ISBN of *Rosewater*. The response is a 202 Accepted status with no body data.
 
 ![Screenshot 2022-02-05 at 15 23 48](https://user-images.githubusercontent.com/25704939/152648124-947b92d6-f97c-4ef3-8060-eb1a7dac5c6e.png)
 The previous DELETE request has worked and *Rosewater* is no longer returned in a GET to localhost:8080/books.
@@ -144,10 +144,11 @@ The previous DELETE request has worked and *Rosewater* is no longer returned in 
 *The Heart of the Race* has been posted to the api.
 
 ![Screenshot 2022-02-05 at 15 29 56](https://user-images.githubusercontent.com/25704939/152648130-9281df78-f627-4e88-b121-009e5f1a2827.png)
-A PUT request is used to edit the data for *Heart of the Race*.
+A PUT request is used to edit the data for *Heart of the Race*. It returns a 202 Accepted status and the updated book data.
 
+#### Read functionality
 ![Screenshot 2022-02-05 at 15 43 13](https://user-images.githubusercontent.com/25704939/152648507-a0108f18-9b60-4a9a-9f2b-292468267eaf.png)
-A GET request to localhost:8080/books/9781786635860, which retrieves *The Heart of the Race* with updated author fields.
+A GET request to localhost:8080/books/9781786635860, which retrieves a 200 OK status and *The Heart of the Race* with updated author fields.
 </details>
 	
 ## Screenshots of database to prove that data is being persisted
@@ -155,7 +156,7 @@ A GET request to localhost:8080/books/9781786635860, which retrieves *The Heart 
 	<summary>Screenshots</summary>
 
 ![Screenshot 2022-02-03 at 13 54 51](https://user-images.githubusercontent.com/25704939/152552234-27723577-cf54-49c1-82ae-db7b0e13bafd.png)
-*The Catcher in the Rye* has been added to the db on 3/2/2022.
+*The Catcher in the Rye* has been added to the database on 3/2/2022.
 
 ![Screenshot 2022-02-05 at 15 45 52](https://user-images.githubusercontent.com/25704939/152648588-15726028-3d73-46c5-9852-d8aeb67721fa.png)
 A SELECT * FROM Books query shows all books in the database on 5/2/2022, including *The Catcher in the Rye* which was added two days prior.
