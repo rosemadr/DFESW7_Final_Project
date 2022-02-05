@@ -122,7 +122,9 @@ Some more advanced improvements for an expanded project:
 Whilst I did have screenshots of Postman showing (almost) complete functionality from day two of my project work, these have been lost as they were on my computer desktop ([see above](https://github.com/rosemadr/DFESW7_Final_Project/edit/documentation/README.md#the-saga-of-my-computer-issues)). Whilst those would have been nice to have the following screenshots demonstrate full CRUD (create, read, update, delete) functionality for my api.
 <details>
 	<summary>Screenshots</summary>
+
 #### Create functionality
+
 ![Screenshot 2022-02-05 at 15 21 25](https://user-images.githubusercontent.com/25704939/152648118-06910dff-1328-42ee-8695-9f9c47c369bf.png)
 Adding the book *V for Vendetta* using a POST request to localhost:8080/books. The request response is the book that has been inputted.
 
@@ -145,23 +147,24 @@ The previous DELETE request has worked and *Rosewater* is no longer returned in 
 A PUT request is used to edit the data for *Heart of the Race*.
 
 ![Screenshot 2022-02-05 at 15 43 13](https://user-images.githubusercontent.com/25704939/152648507-a0108f18-9b60-4a9a-9f2b-292468267eaf.png)
-A GET request to localhost:8080/books/9781786635860, which retrieves *The Heart of the Race*.
-
-	</details>
+A GET request to localhost:8080/books/9781786635860, which retrieves *The Heart of the Race* with updated author fields.
+</details>
 	
 ## Screenshots of database to prove that data is being persisted
 <details>
 	<summary>Screenshots</summary>
+
 ![Screenshot 2022-02-03 at 13 54 51](https://user-images.githubusercontent.com/25704939/152552234-27723577-cf54-49c1-82ae-db7b0e13bafd.png)
 *The Catcher in the Rye* has been added to the db on 3/2/2022.
 
 ![Screenshot 2022-02-05 at 15 45 52](https://user-images.githubusercontent.com/25704939/152648588-15726028-3d73-46c5-9852-d8aeb67721fa.png)
-A SELECT * FROM Books query shows all books in the database. Including *The Catcher in the Rye* which was added two days prior.
+A SELECT * FROM Books query shows all books in the database on 5/2/2022, including *The Catcher in the Rye* which was added two days prior.
 </details>
 
 ## Screenshot of test results, including coverage report
 <details>
 	<summary>Screenshots</summary>
+
 ![Screenshot 2022-02-04 at 11 36 50](https://user-images.githubusercontent.com/25704939/152546616-e6d3e182-12ea-4727-9ff1-0a3185ab4edc.png)
 20/20 tests passing, including web integration, system integration and unit testing.
 
