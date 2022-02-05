@@ -28,6 +28,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### Test db file ###
+testDb.mv.db
+
 ### STS ###
 .apt_generated
 .classpath
