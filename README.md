@@ -36,7 +36,7 @@ The specifics of the objectives were
 
 </details>
 
-For my project I stuck with what I know and built on earlier work I had done during my bootcamp, choosing to make a simple library api. Due to the simplicity of the project, perhaps “book database” would be more apt.
+For my project I stuck with what I know and built on earlier work I had done during my bootcamp, choosing to make a simple library api. Due to the simplicity of the project, perhaps “book database” would be more apt. I was also inspired by the amazing ebook manager [calibre](https://github.com/kovidgoyal/calibre).
 
 #### Technologies used:
 <details>
@@ -54,6 +54,8 @@ For my project I stuck with what I know and built on earlier work I had done dur
 |Jacoco |Code coverage library |managed by Spring Boot |[website](https://www.jacoco.org/jacoco/) |[eclipse market place link for EclEmma code coverage tool](https://marketplace.eclipse.org/content/eclemma-java-code-coverage) | |
 |Mockito |Mocking framework for unit tests |managed by Spring Boot |[website](https://site.mockito.org/) | |
 |Jira |Online project management tool | |[website](https://www.atlassian.com/software/jira) | |
+|GNU Bash |shell script |3.2.57(1) |[website](https://www.gnu.org/software/bash/) | |
+
 
 </details>
 
@@ -64,7 +66,7 @@ I think I expected the project to go fairly well, even though I was less confide
 ## What went well? / What didn't go as planned?
 
 ### Strengths:
-I chose to build up the app from a very basic functioning version containing only controller and entity classes, without repository or service classes. This meant the project took longer than it might have done because it added more steps, the initial code contained some elements that were not used in the final product and conversely, the final product with the integrated service and repository classes contained some new code not in this first version. However, despite the time and effort this process took, I believe it was well spent as it meant I had a functioning app pretty much all the way along, apart from some odd bugs. 
+I chose to build up the app from a very basic functioning version containing only controller and entity classes, without repository or service classes. This meant the project took longer than it might have done because it added more steps, the initial code contained some elements that were not used in the final product and conversely, the final product with the integrated service and repository classes contained some new code not in this first version. However, despite the time and effort this process took, I believe it was well spent as it meant I had a functioning app pretty much all the way along, apart from some odd bugs. I refactored my code incrementally and made sure new components were fully integrated into a functioning app before expanding further.
 
 ### Weaknesses and troubleshooting:
 As could have been predicted, I think some of the weakest areas of my project were the ones where my learning was quite a while ago, or I had spent less time on the topics. Apart from git, which I had been practicing, my knowledge of Jira software and the epic, user story and task model was rusty. Similarly, using the Spring Boot system was slower, as my theoretical understanding of the frameworks was less cemented.
@@ -107,30 +109,70 @@ In adition to a predictable amount of bugs that cropped up in my code which I wa
 A few smaller functional changes which I would have liked to implement, had I more time are:
 * Utilising optionals so that incorrect requests would not cause a program shutdown.
 * Implementing custom exceptions.
-* Adding functionality to check the validity of an ISBN (International Standard Book Number) entered. This could be use a [regex](https://www.oracle.com/technical-resources/articles/java/regex.html) package, or could be a program like [this](https://www.geeksforgeeks.org/program-check-isbn/).
+* Adding functionality to check the validity of an ISBN (International Standard Book Number) entered. This could be use a [regex](https://www.oracle.com/technical-resources/articles/java/regex.html) package, or could be a script like [this](https://www.geeksforgeeks.org/program-check-isbn/).
 
 Some more advanced improvements for an expanded project:
 * Adding custom queries for returning books of the same genre code (I used the [Thema subject categories scheme](https://ns.editeur.org/thema/en)) such that one could do a GET request to a url such as “/books/genre/general-fiction” and receive a list of all books with the genre code “FB”. (As I am using a recognised system like Thema, that data may be available online in a way that could potentially be collected and used automatically). Though the request in itself would not be hard, it would be the mapping of the genre url text and the genre code which would take more time.
-* As implied above, my Library project is very basic and is currently functioning more as book metadata storage. Therefore, further improvements would be adding user and loan entities and contenting them so that users could have loans of specific books.
+* As implied above, my Library project is very basic and is currently functioning more as book metadata storage. Therefore, further improvements would be adding user and loan entities and connecting them so that users could have loans of specific books.
 * Another avenue for expansion is that ISBNs actually contain quite a bit of data (see image below). Contained in the number sequence are values that map to a publishers, terretories or language groups and more. If my project could access such data then it would be possible to automate fields such as “publisher”.
 <img align="centre" width="300" alt="Data elements contained in an 10 and 13 digit ISBN" src="https://upload.wikimedia.org/wikipedia/commons/8/84/ISBN_Details.svg">
 
 ## Screenshots showing postman requests and the output from the API.
 
-Whilst I did have screenshots of Postman showing (almost) complete functionality from day two of my project work, these have been lost as they were on my computer desktop ([see above](https://github.com/rosemadr/DFESW7_Final_Project/edit/documentation/README.md#the-saga-of-my-computer-issues)).
+Whilst I did have screenshots of Postman showing (almost) complete functionality from day two of my project work, these have been lost as they were on my computer desktop ([see above](https://github.com/rosemadr/DFESW7_Final_Project/edit/documentation/README.md#the-saga-of-my-computer-issues)). Whilst those would have been nice to have the following screenshots demonstrate full CRUD (create, read, update, delete) functionality for my api.
+<details>
+	<summary>Screenshots</summary>
 
+#### Create functionality
 
+![Screenshot 2022-02-05 at 15 21 25](https://user-images.githubusercontent.com/25704939/152648118-06910dff-1328-42ee-8695-9f9c47c369bf.png)
+Adding the book *V for Vendetta* using a POST request to localhost:8080/books. The request response is a 201 Created status and the book which has been inputted.
 
+#### Read functionality
+![Screenshot 2022-02-05 at 15 21 39](https://user-images.githubusercontent.com/25704939/152648120-ee4e6f72-b7d6-4043-bcad-76ca020e0397.png)
+A GET request to localhost:8080/books, which gets a list of all books and a 200 OK status. You can see the newly added *V for Vendetta*.
+
+#### Delete functionality
+![Screenshot 2022-02-05 at 15 23 42](https://user-images.githubusercontent.com/25704939/152648123-d0c4eb95-5568-4eea-a240-e6c09afe4809.png)
+A DELETE request to localhost:8080/books/9780316449052. That is the ISBN of *Rosewater*. The response is a 202 Accepted status with no body data.
+
+![Screenshot 2022-02-05 at 15 23 48](https://user-images.githubusercontent.com/25704939/152648124-947b92d6-f97c-4ef3-8060-eb1a7dac5c6e.png)
+The previous DELETE request has worked and *Rosewater* is no longer returned in a GET to localhost:8080/books.
+
+#### Update functionality
+![Screenshot 2022-02-05 at 15 28 00](https://user-images.githubusercontent.com/25704939/152648128-d73d4bdd-3778-4fc0-b23c-d56b9cf45188.png)
+*The Heart of the Race* has been posted to the api.
+
+![Screenshot 2022-02-05 at 15 29 56](https://user-images.githubusercontent.com/25704939/152648130-9281df78-f627-4e88-b121-009e5f1a2827.png)
+A PUT request is used to edit the data for *Heart of the Race*. It returns a 202 Accepted status and the updated book data.
+
+#### Read functionality
+![Screenshot 2022-02-05 at 15 43 13](https://user-images.githubusercontent.com/25704939/152648507-a0108f18-9b60-4a9a-9f2b-292468267eaf.png)
+A GET request to localhost:8080/books/9781786635860, which retrieves a 200 OK status and *The Heart of the Race* with updated author fields.
+</details>
+	
 ## Screenshots of database to prove that data is being persisted
+<details>
+	<summary>Screenshots</summary>
+
+![Screenshot 2022-02-03 at 13 54 51](https://user-images.githubusercontent.com/25704939/152552234-27723577-cf54-49c1-82ae-db7b0e13bafd.png)
+*The Catcher in the Rye* has been added to the database on 3/2/2022.
+
+![Screenshot 2022-02-05 at 15 45 52](https://user-images.githubusercontent.com/25704939/152648588-15726028-3d73-46c5-9852-d8aeb67721fa.png)
+A SELECT * FROM Books query shows all books in the database on 5/2/2022, including *The Catcher in the Rye* which was added two days prior.
+</details>
 
 ## Screenshot of test results, including coverage report
+<details>
+	<summary>Screenshots</summary>
+
 ![Screenshot 2022-02-04 at 11 36 50](https://user-images.githubusercontent.com/25704939/152546616-e6d3e182-12ea-4727-9ff1-0a3185ab4edc.png)
 20/20 tests passing, including web integration, system integration and unit testing.
 
 ![Screenshot 2022-02-04 at 11 36 42](https://user-images.githubusercontent.com/25704939/152546608-9790f431-dda4-43a8-b1bd-11ab4a6e3a94.png)
 
 89.1% test coverage.
-
+	</details>
 
 
 ## [Jira Board Link](https://countzero.atlassian.net/jira/software/projects/DFPM/)
