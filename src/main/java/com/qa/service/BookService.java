@@ -47,8 +47,9 @@ public class BookService {
 			bookInDb.setDigital(book.isDigital());
 			bookInDb.setPublisher(book.getPublisher());
 			bookInDb.setGenreCode(book.getGenreCode());
+			bookInDb.setIsbn(isbn);
 
-			return bookRepo.save(book);
+			return bookRepo.save(bookInDb);
 		} else {
 			book.setIsbn(isbn);
 			return bookRepo.save(book);
